@@ -1,0 +1,110 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+
+const AddFoodItemForm = () => {
+  const [formData, setFormData] = useState({
+    CategoryName: '',
+    name: '',
+    img: '',
+    options: [{ half: '', full: '' }],
+    description: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post('/api/foodItems', formData);
+      // Handle success, clear form or show success message
+      console.log('Food item added successfully');
+    } catch (error) {
+      // Handle error
+      console.error('Error adding food item:', error);
+    }
+  };
+
+  const handleAddOption = () => {
+    setFormData(prevState => ({
+      ...prevState,
+      options: [...prevState.options, { half: '', full: '' }]
+    }));
+  };
+
+  const renderOptionsInput = () => {
+    if (formData.CategoryName === "Pizza") {
+      return (
+        <div>
+          <div>
+            <label>Regular:</label>
+            <input type="text" name="regular" value={formData.options[0].regular} onChange={handleOptionChange} required />
+          </div>
+          <div>
+            <label>Medium:</label>
+            <input type="text" name="medium" value={formData.options[0].medium} onChange={handleOptionChange} required />
+          </div>
+          <div>
+            <label>Large:</label>
+            <input type="text" name="large" value={formData.options[0].large} onChange={handleOptionChange} required />
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <div>
+            <label>Half:</label>
+            <input type="text" name="half" value={formData.options[0].half} onChange={handleOptionChange} required />
+          </div>
+          <div>
+            <label>Full:</label>
+            <input type="text" name="full" value={formData.options[0].full} onChange={handleOptionChange} required />
+          </div>
+        </div>
+      );
+    }
+  };
+
+  const handleOptionChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      options: [{ ...prevState.options[0], [name]: value }]
+    }));
+  };
+
+  return (
+    <div>
+      <h2>Add Food Item</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Category Name:</label>
+          <input type="text" name="CategoryName" value={formData.CategoryName} onChange={handleChange} required />
+        </div>
+        <div>
+          <label>Name:</label>
+          <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+        </div>
+        <div>
+          <label>Image URL:</label>
+          <input type="text" name="img" value={formData.img} onChange={handleChange} required />
+        </div>
+        {renderOptionsInput()}
+        <button type="button" onClick={handleAddOption}>Add Option</button>
+        <div>
+          <label>Description:</label>
+          <textarea name="description" value={formData.description} onChange={handleChange} required />
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
+};
+
+export default AddFoodItemForm;
