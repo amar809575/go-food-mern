@@ -20,8 +20,10 @@ mongoDB()
     app.use('/api/', require("./Routes/OrderData"));
 
 
-    app.get('/', (req, res) => {
-      res.send('Hello World!');
+    app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+    app.get("*", (req, res) => {
+      res.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'));
     });
 
     app.listen(port, () => {
