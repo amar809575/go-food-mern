@@ -18,9 +18,7 @@ const Footer = () => {
           <div className='col-md-8 d-flex mt-auto justify-content-center align-items-center'>
             <span className="text-white">© 2024 GoFood, Inc</span>
           </div>
-          <div className='d-flex mt-auto justify-content-right align-item-right'>
-            <Link className='text-black text-decoration-none' to='/admin'>Admin</Link>
-          </div>
+          
         </footer>
       </div>
     </div>
