@@ -15,16 +15,9 @@ const Footer = () => {
               <h2 className='text-light fst-italic'>GoFood</h2>
             </Link>
           </div>
-<<<<<<< HEAD
           <div className='col-md-10 d-flex mt-auto justify-content-center align-items-center'>
             <span className="text-light">© 2024 GoFood, Inc</span>
           </div>
-=======
-          <div className='col-md-8 d-flex mt-auto justify-content-center align-items-center'>
-            <span className="text-white">© 2024 GoFood, Inc</span>
-          </div>
-          
->>>>>>> 20c748324f9ca61bf9d1c8d8519d8dc96a514c57
         </footer>
       </div>
     </div>
