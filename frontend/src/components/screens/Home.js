@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Card from "../Card";
 import Header from "../Header";
 import Footer from "../Footer";
+import '../../App.css';
 
 const Home = () => {
   const [foodCat, setFoodCat] = useState([]);
@@ -112,7 +113,7 @@ const Home = () => {
         {foodCat.length > 0 ? (
           foodCat.map((category) => (
             <div key={category._id} className="row mb-3">
-              <div className="fs-3 m-3">{category.CategoryName}</div>
+              <div className="fs-3 m-3 text-success">{category.CategoryName}</div>
               <hr />
               {foodItem.length > 0 ? (
                 foodItem
@@ -135,12 +136,12 @@ const Home = () => {
                     </div>
                   ))
               ) : (
-                <div>No Such Data Found</div>
+                <div className="text-danger">No Such Data Found</div>
               )}
             </div>
           ))
         ) : (
-          <div>---------</div>
+          <div className="text-danger">---------</div>
         )}
       </div>
       <Footer />

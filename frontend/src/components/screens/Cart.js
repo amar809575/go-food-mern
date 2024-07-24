@@ -1,12 +1,11 @@
-import React from 'react'
+import React from 'react';
 import { useCart, useDispatchCart } from '../ContextReducer';
-
 import trash from '.././trash.png';
+import '../../App.css';
 
 function Cart() {
     let data = useCart();
     let dispatch = useDispatchCart();
-
 
     if (data.length === 0) {
         return (
@@ -30,12 +29,11 @@ function Cart() {
                     order_date: new Date().toDateString()
                 })
             });
-    
+
             console.log("Response Status:", response.status);
             console.log("Response Text:", response.statusText);
-    
+
             if (response.ok) {
-                
                 dispatch({ type: "DROP" });
             } else {
                 console.error("Error:", response.statusText);
@@ -44,14 +42,13 @@ function Cart() {
             console.error("Error:", error.message);
         }
     };
-    
 
     let totalPrice = data.reduce((total, food) => total + food.price, 0);
     return (
         <div>
             <div className='container m-auto mt-5 table-responsive table-responsive-sm table-responsive-md'>
-                <table className="table table-borderless table-dark">
-                    <thead className='text-success fs-4'>
+                <table className="table table-borderless table-light">
+                    <thead className='text-dark fs-4'>
                         <tr>
                             <th scope='col'>#</th>
                             <th scope='col'>Name</th>
@@ -70,7 +67,7 @@ function Cart() {
                                 <td>{food.size}</td>
                                 <td>{food.price}</td>
                                 <td>
-                                    <button type='button' className='btn p-0 d-flex align-items-center justify-content-center bg-dark'>
+                                    <button type='button' className='btn p-0 d-flex align-items-center justify-content-center bg-light'>
                                         <img src={trash} alt='delete' onClick={() => { dispatch({ type: "REMOVE", index: index }) }}
                                             style={{ maxHeight: '30px', maxWidth: '30px', display: 'block', margin: 'auto' }} />
                                     </button>
@@ -81,12 +78,12 @@ function Cart() {
                 </table>
 
                 <div>
-                    <h2 className='text-white'>
+                    <h2 className='text-dark'>
                         Total Price: &#8377;{totalPrice}/-
                     </h2>
                 </div>
                 <div>
-                    <button className='btn bg-success mt-5' onClick={handleCheckout}>Check Out</button>
+                    <button className='btn btn-dark mt-5' onClick={handleCheckout}>Check Out</button>
                 </div>
             </div>
         </div>
