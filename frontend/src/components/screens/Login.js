@@ -50,8 +50,8 @@ const Login = () => {
     <div>
       <Header />
       <h1 className="text-center mt-5">Login Page</h1>
-      <div className='container d-flex justify-content-center align-items-center' style={{ height: '60vh' }}>
-      <form onSubmit={handleSubmit} style={{ width: '300px' }}>
+      <div className='container d-flex justify-content-center align-items-center' style={{ height: '40vh' }}>
+      <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="email" className="form-label">Email address</label>
             <input 
@@ -78,8 +78,11 @@ const Login = () => {
               style={{ backgroundColor: "#e9ecef" }} 
             />
           </div>
-          <button type="submit" className="m-3 btn btn-success">Submit</button>
-          <Link to="/createuser" className='m-3 btn btn-danger'>I'm a new user</Link>
+          <div className="d-flex justify-content-center align-items-center">
+  <button type="submit" className="m-3 btn btn-success">Submit</button>
+  <Link to="/createuser" className='m-3 btn btn-danger'>I'm a new user</Link>
+</div>
+
         </form>
       </div>
     </div>
