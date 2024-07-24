@@ -55,7 +55,7 @@ function Signup() {
         <>
             <Header />
             <div className='container'>
-                <h1 className="text-center text-white mt-4 mb-4">Sign Up</h1>
+                <h1 className="text-center mt-4 mb-4">Sign Up</h1>
                 <div className='container d-flex justify-content-center align-items-center' style={{ height: '60vh' }}>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
