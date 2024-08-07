@@ -1,0 +1,29 @@
+const express = require('express');
+const router = express.Router();
+const FoodItem = require('../models/FoodItem'); // Assuming your model is defined in a separate file
+
+// Route to insert data into MongoDB
+router.post('/foodItems', async (req, res) => {
+  try {
+    const { CategoryName, name, img, options, description } = req.body;
+
+    // Create a new FoodItem document
+    const foodItem = new FoodItem({
+      CategoryName,
+      name,
+      img,
+      options,
+      description
+    });
+
+    // Save the document to the database
+    await foodItem.save();
+
+    res.status(201).json({ message: 'Food item created successfully', data: foodItem });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+module.exports = router;
