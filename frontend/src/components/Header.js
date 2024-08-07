@@ -9,29 +9,15 @@ import logo from './GoFoodLogo.png';
 import '../App.css';
 
 const Header = () => {
-<<<<<<< HEAD
   let data = useCart();
   const [cartView, setCartView] = useState(false);
   const navigate = useNavigate();
   
-=======
-
-  let data = useCart();
-
-  const [cartView, setCartView] = useState(false);
-
-  const navigate = useNavigate();
-
->>>>>>> origin/master
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     navigate('/login');
   }
-<<<<<<< HEAD
   
-=======
-
->>>>>>> origin/master
   return (
     <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: '#343a40' }}>
       <div className="container-fluid">
@@ -60,11 +46,7 @@ const Header = () => {
             <div>
               <div className='btn btn-outline-light mx-2' onClick={() => { setCartView(true) }}>
                 My Cart {" "}
-<<<<<<< HEAD
                 <Badge pill bg='danger'>{data.length}</Badge>
-=======
-                <Badge pill bg='danger' >{data.length}</Badge>
->>>>>>> origin/master
               </div>
               {cartView ? <Modal onClose={() => { setCartView(false) }} ><Cart /></Modal> : null}
               <div className='btn btn-outline-danger mx-2' onClick={handleLogout}>Logout</div>
@@ -76,8 +58,4 @@ const Header = () => {
   );
 };
 
-<<<<<<< HEAD
 export default Header;
-=======
-export default Header;
->>>>>>> origin/master

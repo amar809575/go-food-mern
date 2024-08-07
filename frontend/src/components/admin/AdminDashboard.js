@@ -65,7 +65,6 @@ const AdminDashboard = () => {
             <tr>
               <th>Sl. No.</th>
               <th>Description</th>
-              <th>Status</th>
             </tr>
           </thead>
           <tbody>

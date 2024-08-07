@@ -7,13 +7,10 @@ import 'bootstrap/dist/js/bootstrap.bundle.js';
 import Signup from './components/screens/Signup';
 import { CartProvider } from './components/ContextReducer';
 import MyOrder from './components/screens/MyOrder';
-<<<<<<< HEAD
 import AdminLogin from './components/admin/AdminLogin';
 import AdminDashboard from './components/admin/AdminDashboard';
 import FoodItemUpload from './components/admin/FoodItemUpload';
 import FoodItem from './components/admin/FoodItem';
-=======
->>>>>>> origin/master
 
 
 const App = () => {
@@ -31,14 +28,10 @@ const App = () => {
               <Route path='/login' element={<Login />} />
               <Route path='/createuser' element={<Signup />} />
               <Route path='/myOrder' element={<MyOrder />} />
-<<<<<<< HEAD
               <Route path='/adminLogin' element={<AdminLogin /> } />
               <Route path='/adminDashboard' element={<AdminDashboard /> } />
               <Route path='/uploadFoodItems' element={<FoodItemUpload />} />
               <Route path='/foodItems' element={<FoodItem /> } />
-=======
-              
->>>>>>> origin/master
 
 
             </Routes>
