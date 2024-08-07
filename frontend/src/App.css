@@ -88,7 +88,11 @@ header h1, footer p {
 /* Form Styles */
 form {
   background: #ffffff;
+<<<<<<< HEAD
   margin-top: 5%;
+=======
+  margin-top: 10%;
+>>>>>>> origin/master
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -174,6 +178,7 @@ form {
     width: 100%;
   }
 }
+<<<<<<< HEAD
 
 
 /* Edit Form Component */
@@ -293,3 +298,5 @@ form {
 }
 
 
+=======
+>>>>>>> origin/master

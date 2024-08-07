@@ -31,7 +31,11 @@ const Login = () => {
     const json = await response.json();
 
     if (!json.success) {
+<<<<<<< HEAD
       alert('Enter valid credentials!');
+=======
+      alert('Enter valid credentials!!!');
+>>>>>>> origin/master
     } else {
       localStorage.setItem("userEmail", credentials.email);
       localStorage.setItem("authToken", json.authToken);
@@ -49,6 +53,7 @@ const Login = () => {
   return (
     <div>
       <Header />
+<<<<<<< HEAD
       <div className="container d-flex flex-column align-items-center mt-5" style={{ minHeight: '80vh' }}>
         <h1 className="text-center mb-4">Login Page</h1>
         <div className="w-100" style={{ maxWidth: '500px' }}>
@@ -85,6 +90,43 @@ const Login = () => {
             </div>
           </form>
         </div>
+=======
+      <h1 className="text-center mt-5">Login Page</h1>
+      <div className='container d-flex justify-content-center align-items-center' style={{ height: '40vh' }}>
+      <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">Email address</label>
+            <input 
+              type="email" 
+              id='email' 
+              className="form-control"
+              name='email' 
+              value={credentials.email}
+              onChange={handleChange} 
+              autoComplete="on" 
+              style={{ backgroundColor: "#e9ecef" }} 
+            />
+            <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">Password</label>
+            <input 
+              type="password" 
+              name='password'
+              value={credentials.password}
+              onChange={handleChange}
+              className="form-control"
+              id="password" 
+              style={{ backgroundColor: "#e9ecef" }} 
+            />
+          </div>
+          <div className="d-flex justify-content-center align-items-center">
+  <button type="submit" className="m-3 btn btn-success">Submit</button>
+  <Link to="/createuser" className='m-3 btn btn-danger'>I'm a new user</Link>
+</div>
+
+        </form>
+>>>>>>> origin/master
       </div>
     </div>
   );
