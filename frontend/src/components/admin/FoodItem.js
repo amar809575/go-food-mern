@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import EditForm from "./EditForm";
 import AdminHeader from "./AdminHeader";
-import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 
 const FoodItem = () => {
   const [foodCat, setFoodCat] = useState([]);
@@ -20,7 +21,6 @@ const FoodItem = () => {
       });
 
       const responseData = await response.json();
-      console.log(responseData);
       setFoodItem(responseData[0]);
       setFoodCat(responseData[1]);
     } catch (error) {
@@ -41,7 +41,6 @@ const FoodItem = () => {
   }, {});
 
   const handleEdit = (item) => {
-    console.log("Edit item: ", item);
     setEditItem(item);
     setIsEditModalOpen(true);
   };
@@ -55,9 +54,22 @@ const FoodItem = () => {
     setIsEditModalOpen(false);
   };
 
-  const deleteData = (item) => {
+  
+  const deleteData = async (item) => {
     console.log("Delete item: ", item);
+    try {
+      const response = await axios.delete(`http://localhost:5000/api/deleteItem/${item._id}`);
+      if (response.data && response.data.message) {
+        alert(`${item.name} Deleted successfully!!!`);
+      } else {
+        alert(`${item.name} has not been deleted!!!`);
+      }
+    } catch (error) {
+      console.error(`Error in processing delete item: ${item.name} : `, error);
+      alert(`Error deleting ${item.name}: ${error.message}`);
+    }
   };
+  
 
   return (
     <>

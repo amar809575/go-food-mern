@@ -118,4 +118,19 @@ router.get("/adminOrders", async (req, res) => {
   }
 });
 
+router.delete('/deleteItem/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+      const deleteItem = await FoodItem.findByIdAndDelete(id);
+      if (!deleteItem) {
+        return res.status(404).send(`Item with ID ${id} not found`);
+      }
+      res.json({ message: 'Item deleted successfully!!!', deleteItem: deleteItem });
+    } catch (error) {
+      console.error("Error deleting item ", error);
+      res.status(500).send("Server Error");
+    }
+  });
+  
+
 module.exports = router;

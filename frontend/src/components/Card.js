@@ -46,7 +46,7 @@ export default function Card(props) {
         return;
       }
     }
-
+    
     await dispatch({
       type: "ADD",
       id: props.foodItem._id,
