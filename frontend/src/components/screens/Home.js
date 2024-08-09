@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Card from "../Card";
 import Header from "../Header";
 import Footer from "../Footer";
-import '../../App.css';
+import "../../App.css";
 
 const Home = () => {
   const [foodCat, setFoodCat] = useState([]);
@@ -22,7 +22,6 @@ const Home = () => {
       const responseData = await response.json();
       setFoodItem(responseData[0]);
       setFoodCat(responseData[1]);
-
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -116,9 +115,7 @@ const Home = () => {
                     .filter(
                       (item) =>
                         item.CategoryName === category.CategoryName &&
-                        item.name
-                          .toLowerCase()
-                          .includes(search.toLowerCase())
+                        item.name.toLowerCase().includes(search.toLowerCase())
                     )
                     .map((filterItems) => (
                       <div
@@ -127,7 +124,12 @@ const Home = () => {
                       >
                         <Card
                           foodItem={filterItems}
-                          options={filterItems.options[0]}
+                          options={
+                            filterItems.options &&
+                            filterItems.options.length > 0
+                              ? filterItems.options[0]
+                              : null
+                          }
                         />
                       </div>
                     ))
