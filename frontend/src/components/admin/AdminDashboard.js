@@ -24,7 +24,6 @@ const AdminDashboard = () => {
 
       setUserData(data.users); // Change 'user' to 'users'
       setOrderData(data.orders);
-      console.log(data);
       
     } catch (error) {
       console.error("Error fetching the data: ", error);
@@ -41,8 +40,8 @@ const AdminDashboard = () => {
       [email]: {
         ...(prevStatuses[email] || {}),
         [orderDate]: {
-          color: "#339900",
-          text: "Delivered",
+          color: "#ffcc00",
+          text: "Order Processing",
         },
       },
     }));
@@ -105,11 +104,11 @@ const AdminDashboard = () => {
                                   <button
                                     className="btn"
                                     style={{
-                                      backgroundColor: orderStatuses[user.email]?.[orderData[0].Order_date]?.color || "#ffcc00",
+                                      backgroundColor: orderStatuses[user.email]?.[orderData[0].Order_date]?.color || "#339900",
                                     }}
                                     onClick={() => handleOrderStatus(user.email, orderData[0].Order_date)}
                                   >
-                                    {orderStatuses[user.email]?.[orderData[0].Order_date]?.text || "Order Processing"}
+                                    {orderStatuses[user.email]?.[orderData[0].Order_date]?.text || "Delivered"}
                                   </button>
                                 </td>
                               </tr>

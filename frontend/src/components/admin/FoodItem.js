@@ -102,7 +102,8 @@ const FoodItem = () => {
                       <td>{item.name}</td>
                       <td>{item.description}</td>
                       <td>
-                        {Object.entries(item.options).map(([key, value]) => (
+                      {item.options && typeof item.options === "object" ? (
+                        Object.entries(item.options).map(([key, value]) => (
                           <div key={key}>
                             {typeof value === "object" ? (
                               Object.entries(value).map(([subKey, subValue]) => (
@@ -114,7 +115,10 @@ const FoodItem = () => {
                               value.toString()
                             )}
                           </div>
-                        ))}
+                        ))
+                      ) : (
+                        <div>No Options are available....</div>
+                      )}
                       </td>
                       <td>
                         <img
