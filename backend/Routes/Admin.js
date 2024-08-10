@@ -32,38 +32,39 @@ router.get("/getCategories", async (req, res) => {
 
 router.post("/uploadFoodItem", upload.single("imageFile"), async (req, res) => {
     const { name, img, CategoryName, options, description } = req.body;
-
+  
     try {
-        let imageUrl = img;
-        if (req.file) {
-            imageUrl = `uploads/${req.file.filename}`;
-        }
+      let imageUrl = img;
+      if (req.file) {
+        imageUrl = `uploads/${req.file.filename}`;
+      }
+  
+      const parsedOptions = JSON.parse(options);
+      console.log(parsedOptions);
 
-        const parsedOptions = [JSON.parse(options)];
-
-        const categoryExists = await FoodCategory.findOne({ CategoryName });
-
-        if (!categoryExists) {
-            await new FoodCategory({ CategoryName }).save();
-        }
-
-        const newFoodItem = new FoodItem({
-            name,
-            img: imageUrl,
-            CategoryName,
-            options: parsedOptions,
-            description
-        });
-
-        await newFoodItem.save();
-
-        res.json({ success: true });
+  
+      const categoryExists = await FoodCategory.findOne({ CategoryName });
+      if (!categoryExists) {
+        await new FoodCategory({ CategoryName }).save();
+      }
+  
+      const newFoodItem = new FoodItem({
+        name,
+        img: imageUrl,
+        CategoryName,
+        options: parsedOptions,
+        description,
+      });
+  
+      await newFoodItem.save();
+  
+      res.json({ success: true });
     } catch (error) {
-        console.error("Error uploading food item:", error);
-        res.status(500).send("Server Error");
+      console.error("Error uploading food item:", error);
+      res.status(500).send("Server Error");
     }
-});
-
+  });
+    
 router.put('/foodItemUpdate/:id', upload.single('imageFile'), async (req, res) => {
     const { id } = req.params;
     const { name, img, CategoryName, options, description } = req.body;

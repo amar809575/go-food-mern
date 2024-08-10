@@ -21,8 +21,12 @@ const FoodItem = () => {
       });
 
       const responseData = await response.json();
+ 
+      const sortedCategories = responseData[1].sort((a, b) => 
+        a.CategoryName.localeCompare(b.CategoryName)
+    );
       setFoodItem(responseData[0]);
-      setFoodCat(responseData[1]);
+      setFoodCat(sortedCategories);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -56,7 +60,6 @@ const FoodItem = () => {
 
   
   const deleteData = async (item) => {
-    console.log("Delete item: ", item);
     try {
       const response = await axios.delete(`http://localhost:5000/api/deleteItem/${item._id}`);
       if (response.data && response.data.message) {
@@ -85,7 +88,7 @@ const FoodItem = () => {
               <tr>
                 <th>Name</th>
                 <th>Description</th>
-                <th>Price</th>
+                <th style={{ width: "10%"}}>Price</th>
                 <th>Image</th>
                 <th>Edit</th>
                 <th>Delete</th>

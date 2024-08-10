@@ -6,12 +6,16 @@ const FoodItemSchema = new Schema({
     img: { type: String },
     CategoryName: { type: String, required: true },
     options: {
-        half: { type: String },
-        full: { type: String },
-        regular: { type: String },
-        medium: { type: String },
-        large: { type: String }
-    },
+        type: [{ 
+          half: String,
+          full: String,
+          regular: String,
+          medium: String,
+          large: String,
+          _id: false,
+        }],
+        required: true,
+      },
     description: { type: String, required: true }
 }, { collection: "food_items" });
 

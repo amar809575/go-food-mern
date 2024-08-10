@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AdminHeader from "./AdminHeader";
-import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 
 const FoodItemUpload = () => {
   const [foodItem, setFoodItem] = useState({
@@ -48,25 +48,28 @@ const FoodItemUpload = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const filledOptions = Object.entries(foodItem.options)
-      .filter(([key, value]) => value !== "")
-      .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
-
+  
+    // Create an array with the options
+    const filledOptions = [
+      Object.entries(foodItem.options)
+        .filter(([key, value]) => value !== "")
+        .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {})
+    ];
+  
     const formData = new FormData();
     formData.append("name", foodItem.name);
     formData.append("description", foodItem.description);
-    formData.append("options", JSON.stringify(filledOptions));
-
+    formData.append("options", JSON.stringify(filledOptions)); // Send options as an array
+  
     if (imageFile) {
       formData.append("imageFile", imageFile);
     } else {
       formData.append("img", foodItem.img);
     }
-
+  
     const category = foodItem.newCategory || foodItem.category;
     formData.append("CategoryName", category);
-
+  
     try {
       const response = await axios.post(
         "http://localhost:5000/api/uploadFoodItem",
@@ -94,7 +97,7 @@ const FoodItemUpload = () => {
       alert("Error uploading food item. Please try again.");
     }
   };
-
+  
   return (
     <>
       <AdminHeader />
@@ -102,7 +105,10 @@ const FoodItemUpload = () => {
         <h2 className="text-center mb-4">Upload Food Item</h2>
         <div className="row justify-content-center">
           <div className="col-md-8 col-lg-6">
-            <form onSubmit={handleSubmit} className="p-4 border rounded bg-light">
+            <form
+              onSubmit={handleSubmit}
+              className="p-4 border rounded bg-light"
+            >
               <div className="mb-3">
                 <label htmlFor="name" className="form-label">
                   Food Name
@@ -187,28 +193,7 @@ const FoodItemUpload = () => {
               <div className="mb-3">
                 <label className="form-label">Options</label>
                 <div className="d-flex flex-wrap gap-2">
-                  {foodItem.category !== "Pizza" ? (
-                    <div className="d-flex gap-2">
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="half"
-                        placeholder="Half price"
-                        value={foodItem.options.half}
-                        onChange={handleChange}
-                        required={foodItem.category !== "Pizza"}
-                      />
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="full"
-                        placeholder="Full price"
-                        value={foodItem.options.full}
-                        onChange={handleChange}
-                        required={foodItem.category !== "Pizza"}
-                      />
-                    </div>
-                  ) : (
+                  {foodItem.category === "Pizza" ? (
                     <div className="d-flex gap-2">
                       <input
                         type="text"
@@ -234,6 +219,39 @@ const FoodItemUpload = () => {
                         name="large"
                         placeholder="Large price"
                         value={foodItem.options.large}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                  ) : foodItem.category === "Burger" ? (
+                    <div className="d-flex gap-2">
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="full"
+                        placeholder="Full price"
+                        value={foodItem.options.full}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                  ) : (
+                    <div className="d-flex gap-2">
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="half"
+                        placeholder="Half price"
+                        value={foodItem.options.half}
+                        onChange={handleChange}
+                        required
+                      />
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="full"
+                        placeholder="Full price"
+                        value={foodItem.options.full}
                         onChange={handleChange}
                         required
                       />

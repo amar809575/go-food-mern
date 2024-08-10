@@ -12,11 +12,7 @@ router.post('/orderData', async (req, res) => {
 
         const orderArray = [{ Order_date: orderDate}, ...orderData];
 
-        console.log("Email:", req.body.email);
-        console.log("Data:", orderData);
-
         let existingUser = await Order.findOne({ email: req.body.email });
-        console.log("Existing User:", existingUser);
 
         if (!existingUser) {
             await Order.create({
